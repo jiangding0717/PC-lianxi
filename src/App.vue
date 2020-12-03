@@ -1,10 +1,22 @@
 <template>
-  <div>hahah</div>
+  <div>
+    <Header />
+    <router-view></router-view>
+    <Footer />
+  </div>
 </template>
 
 <script>
+import Header from './components/Header';
+import Footer from './components/Footer';
 export default {
-  name: '',
+  name: 'App',
+
+  //注册组件
+  components: {
+    Header,
+    Footer,
+  },
 };
 </script>
 
