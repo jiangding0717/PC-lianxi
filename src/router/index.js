@@ -23,7 +23,7 @@ export default new VueRouter({
     },
     {
       name: 'search', //命名路由
-      path: '/search',
+      path: '/search/:searchText?',
       component: Search,
     }
   ]

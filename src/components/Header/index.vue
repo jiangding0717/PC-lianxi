@@ -32,10 +32,12 @@
       </h1>
       <div class="searchArea">
         <form action="###" class="searchForm">
+          <!-- @submit.prevent="search" -->
           <input
             type="text"
             id="autocomplete"
             class="input-error input-xxlarge"
+            v-model="searchText"
           />
           <button
             class="sui-btn btn-xlarge btn-danger"
@@ -44,6 +46,14 @@
           >
             搜索
           </button>
+          <!-- 
+            问题：点击搜索，路径出现问号（原因是提交了表单）
+            1. button 按钮如果没有type 那么在表单中 默认type就是submit
+              此时会提交表单，事件就绑定在form上
+                @submit.prevent="search"
+            2. 不用form表单
+                @click="search"
+           -->
         </form>
       </div>
     </div>
@@ -53,10 +63,27 @@
 <script>
 export default {
   name: 'Header',
+  data() {
+    return {
+      searchText: '',
+    };
+  },
 
   methods: {
     search() {
-      this.$router.push('/search');
+      // const { searchText } = this;
+      // const params = searchText ? `/${searchText}` : '';
+      // const location = '/search' + params;
+      // this.$router.push(location);
+
+      const { searchText } = this;
+      const location = { name: 'search' };
+      if (searchText) {
+        location.params = {
+          searchText,
+        };
+      }
+      this.$router.push(location);
     },
   },
 };
